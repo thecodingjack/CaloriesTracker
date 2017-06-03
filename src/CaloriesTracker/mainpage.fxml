@@ -1,0 +1,53 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.TextArea?>
+<BorderPane fx:id="mainBorderPane" fx:controller="CaloriesTracker.Controller"
+            xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <VBox>
+            <HBox>
+                <Label text = "Today "/>
+            </HBox>
+            <ToolBar>
+                <Button onMouseClicked="#showNewItemDialog">
+                    <tooltip>
+                        <Tooltip text = "Add new item"/>
+                    </tooltip>
+                    <graphic>
+                        <ImageView>
+                           <Image url="@/toolbarButtonGraphics/general/New24.gif"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </ToolBar>
+        </VBox>
+    </top>
+    <center>
+        <VBox>
+            <ListView fx:id = "foodConsumed" >
+
+            </ListView>
+        </VBox>
+    </center>
+    <bottom>
+        <VBox>
+            <TextArea fx:id="foodDetailsTextArea"
+                        wrapText="true">
+            </TextArea>
+            <HBox>
+                <Label fx:id="totalCal"/>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>

@@ -5,7 +5,7 @@ This basic version can do the following:
 -delete food entry(right click on item)  
 -save and load to text file  
 -save food recipe  
--calculate calories consumed
+-calculate calories consumed  
 -edit food entry (added on v1.1)
   
 Things I would like to add to the future version:  

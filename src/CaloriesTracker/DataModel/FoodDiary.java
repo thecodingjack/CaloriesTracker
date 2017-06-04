@@ -28,10 +28,6 @@ public class FoodDiary {
         return foodItems;
     }
 
-//    public void setFoodItems(ObservableList <Food> foods){
-//        this.foodItems = foods;
-//    }
-
     private FoodDiary (){
 
     };
@@ -79,13 +75,9 @@ public class FoodDiary {
                 br.close();
             }
         }
-
     }
 
     public void addFoodItems(Food food){
         foodItems.add(food);
     }
-
-
-
 }

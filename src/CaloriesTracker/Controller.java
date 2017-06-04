@@ -6,8 +6,6 @@ import CaloriesTracker.DataModel.Workout;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -70,39 +68,57 @@ public class Controller {
 
     }
 
-//    public ListView<Food> getFoodConsumed() {
-//        return foodConsumed;
-//    }
+    @FXML
+    public void showEditItemDialog(Food selectedFood){
+        Dialog<ButtonType> NewFoodDialog = new Dialog<>();
+        NewFoodDialog.initOwner(mainBorderPane.getScene().getWindow());
+        NewFoodDialog.setTitle("Edit Item");
+        NewFoodDialog.setHeaderText("Input name of food, quantity and calories per serving ");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("NewFoodDialog.fxml"));
+        try {
+            NewFoodDialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e){
+            System.out.println("Couldn't load the dialog");
+            e.printStackTrace();
+            return;
+        }
+        NewFoodDialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        NewFoodDialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
-    public ObservableList<Food> getFoods() {
-        return foods;
+        NewFoodDialogController controller = fxmlLoader.getController();
+        controller.editResults(selectedFood);
+
+        Optional<ButtonType> result = NewFoodDialog.showAndWait();
+        if (result.isPresent() && result.get()==ButtonType.OK){
+            controller.updateResults(selectedFood);
+
+            calculateCalSum();
+
+        }
+
     }
 
 
+
     public void initialize(){
-//        Food food1 = new Food("Apple" , 1,100);
-//        Food food2= new Food ("Chicken Breast", 2,100);
-//        Food food3 = new Food("Apple" , 2,100);
-//        foods = new HashSet<>();
-//
-//        foods.add(food1);
-//        foods.add(food2);
-//        foods.add(food3);
-//
-//        FoodDiary.getInstance().setFoodItems(foods);
-//        FoodRecipe.getInstance().setFoodRecipeItems(foods);
         foodConsumed.setItems(FoodDiary.getInstance().getFoodItems());
 
         foodContextMenu = new ContextMenu();
         MenuItem deleteMenuItem = new MenuItem("Delete");
-        deleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        MenuItem editMenuItem = new MenuItem("Edit");
+
+        editMenuItem.setOnAction(e -> {
+            Food food = foodConsumed.getSelectionModel().getSelectedItem();
+            editItem(food);
+        });
+
+        deleteMenuItem.setOnAction(e -> {
                 Food food = foodConsumed.getSelectionModel().getSelectedItem();
                 deleteItem(food);
-            }
         });
-        foodContextMenu.getItems().addAll(deleteMenuItem);
+
+        foodContextMenu.getItems().addAll(deleteMenuItem, editMenuItem);
         foodConsumed.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         foodConsumed.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Food>() {
             @Override
@@ -149,6 +165,13 @@ public class Controller {
     public void deleteItem(Food food){
         FoodDiary.getInstance().getFoodItems().remove(food);
         calculateCalSum();
+    }
+
+    public void editItem(Food selectedFood){
+        int selectedFoodIndex = foodConsumed.getSelectionModel().getSelectedIndex();
+        showEditItemDialog(selectedFood);
+        foodConsumed.setItems(FoodDiary.getInstance().getFoodItems());
+        foodConsumed.getSelectionModel().select(selectedFoodIndex);
     }
 
     public void calculateCalSum(){

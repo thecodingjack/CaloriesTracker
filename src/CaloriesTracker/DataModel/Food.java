@@ -59,10 +59,10 @@ public class Food {
         return quantity;
     }
 
-    @Override
-    public String toString() {
-        return this.getName();
-    }
+//    @Override
+//    public String toString() {
+//        return this.getName();
+//    }
 
     public String getDescription(){
         return ("Consumed " + quantity + " " + name + ": " + totalcal + " Total calories consumed");

@@ -1,0 +1,20 @@
+<!--<?import javafx.scene.control.DialogPane?>-->
+<!--<?import javafx.scene.layout.GridPane?>-->
+<!--<?import javafx.scene.control.Label?>-->
+<!--<?import javafx.scene.control.TextField?>-->
+<!--<DialogPane fx:controller ="CaloriesTracker.EditFoodDialogController"-->
+            <!--xmlns:fx="http://javafx.com/fxml">-->
+    <!--<headerText>-->
+        <!--Instructions-->
+    <!--</headerText>-->
+    <!--<content>-->
+        <!--<GridPane>-->
+            <!--<Label text = "Name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>-->
+            <!--<TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>-->
+            <!--<Label text = "Quantity" GridPane.rowIndex="1" GridPane.columnIndex="0"/>-->
+            <!--<TextField fx:id="quantityField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>-->
+            <!--<Label text = "Cal" GridPane.rowIndex="2" GridPane.columnIndex="0"/>-->
+            <!--<TextField fx:id="calField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>-->
+        <!--</GridPane>-->
+    <!--</content>-->
+<!--</DialogPane>-->
